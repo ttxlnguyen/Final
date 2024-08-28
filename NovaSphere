@@ -1,0 +1,42 @@
+entity UserProfile {
+username String
+email String
+password String
+ 
+}
+
+
+entity Messages{
+content String
+sentAt Instant
+editedAt Instant
+isDeleted Boolean
+}
+
+entity Channels{
+name String
+}
+
+entity Reactions{
+reaction String
+}
+
+relationship OneToMany{
+UserProfile{messages} to Messages
+}
+
+relationship ManyToMany{
+UserProfile{channels} to Channels{userProfile}
+}
+
+relationship OneToMany{
+Channels{messages} to Messages
+}
+
+relationship ManyToOne{
+Reactions{user} to UserProfile
+}
+
+relationship ManyToOne{
+Reactions{messages} to Messages
+}
