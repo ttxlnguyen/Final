@@ -1,0 +1,29 @@
+{
+  "finalApp": {
+    "messages": {
+      "home": {
+        "title": "Messages",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Messages",
+        "createOrEditLabel": "Create or edit a Messages",
+        "notFound": "No Messages found"
+      },
+      "created": "A new Messages is created with identifier {{ param }}",
+      "updated": "A Messages is updated with identifier {{ param }}",
+      "deleted": "A Messages is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Messages {{ id }}?"
+      },
+      "detail": {
+        "title": "Messages"
+      },
+      "id": "ID",
+      "content": "Content",
+      "sentAt": "Sent At",
+      "editedAt": "Edited At",
+      "isDeleted": "Is Deleted",
+      "userProfile": "User Profile",
+      "channels": "Channels"
+    }
+  }
+}
