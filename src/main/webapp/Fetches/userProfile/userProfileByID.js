@@ -15,4 +15,5 @@ function displayData(data) {
   div.innerHTML = formatDisplay;
   container.appendChild(div);
 }
+
 console.log('Hi');
