@@ -1,0 +1,26 @@
+{
+  "finalApp": {
+    "reactions": {
+      "home": {
+        "title": "Reactions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Reactions",
+        "createOrEditLabel": "Create or edit a Reactions",
+        "notFound": "No Reactions found"
+      },
+      "created": "A new Reactions is created with identifier {{ param }}",
+      "updated": "A Reactions is updated with identifier {{ param }}",
+      "deleted": "A Reactions is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Reactions {{ id }}?"
+      },
+      "detail": {
+        "title": "Reactions"
+      },
+      "id": "ID",
+      "reaction": "Reaction",
+      "user": "User",
+      "messages": "Messages"
+    }
+  }
+}

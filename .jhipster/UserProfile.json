@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20240828195847"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "username",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String"
+    }
+  ],
+  "name": "UserProfile",
+  "relationships": [
+    {
+      "otherEntityName": "messages",
+      "relationshipName": "messages",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "channels",
+      "otherEntityRelationshipName": "userProfile",
+      "relationshipName": "channels",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,29 @@
+{
+  "annotations": {
+    "changelogDate": "20240828195849"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Channels",
+  "relationships": [
+    {
+      "otherEntityName": "messages",
+      "relationshipName": "messages",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "channels",
+      "relationshipName": "userProfile",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}
