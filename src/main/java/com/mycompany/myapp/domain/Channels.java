@@ -27,12 +27,12 @@ public class Channels implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "channels")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "channels") //I changed the fetch tpe to Eager to get whole json body
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "userProfile", "channels" }, allowSetters = true)
     private Set<Messages> messages = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "channels")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "channels") //I changed the fetch type to eager to get whole json body
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "messages", "channels" }, allowSetters = true)
     private Set<UserProfile> userProfiles = new HashSet<>();
