@@ -22,12 +22,12 @@
 
 // postAMessage();
 
-async function postAMessage(messageData) {
+async function postAMessage(messageData, channelID, username) {
   try {
     const token =
       'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNTMxNjY0MywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI1MjMwMjQzfQ.DV6T7oEpTNrJGIJ5LqyotC1Dk8bh_fxBdbESM8ocRNZD8nALrvQIq30GKjJOlV04jRLgw3VnKfFWaAyXI5Mb0g';
 
-    const response = await fetch('http://localhost:8080/api/messages', {
+    const response = await fetch(`http://localhost:8080/api/messages/channels/${channelID}/userProfiles/${username}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -54,11 +54,13 @@ document.getElementById('message-form').addEventListener('submit', function (eve
   event.preventDefault();
 
   const content = document.getElementById('content').value;
+  const channelID = 4;
+  const username = 'ForrestOfSorts';
   const messageData = {
     content,
     sentAt: new Date().toISOString(),
   };
-  postAMessage(messageData);
+  postAMessage(messageData, channelID, username);
   console.log(messageData);
 });
 

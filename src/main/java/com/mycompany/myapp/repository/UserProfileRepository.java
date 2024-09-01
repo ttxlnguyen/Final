@@ -28,5 +28,6 @@ public interface UserProfileRepository extends UserProfileRepositoryWithBagRelat
         return this.fetchBagRelationships(this.findAll(pageable));
     }
 
+    @Query("SELECT u FROM UserProfile u WHERE u.username=?1")
     UserProfile findByUsername(String username);
 }
