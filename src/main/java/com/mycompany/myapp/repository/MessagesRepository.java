@@ -20,16 +20,4 @@ public interface MessagesRepository extends JpaRepository<Messages, Long> {
         nativeQuery = true
     )
     List<Messages> findAllMessagesByChannelId(Long id);
-    //    @Query("SELECT m FROM Messages m " +
-    //        "JOIN m.userProfile u " +
-    //        "JOIN m.channels c " +
-    //        "WHERE c.id = :channelId")
-    //    List<Messages> findAllMessagesByChannelId(@Param("channelId") Long channelId);
-
-    //@Query("SELECT new com.mycompany.myapp.dto.MessageDTO(m.id, m.content, m.sentAt, m.editedAt, m.isDeleted, u.id, u.username, u.email, c.id, c.name) " +
-    //    "FROM Messages m " +
-    //    "JOIN m.userProfile u " +
-    //    "JOIN m.channels c " +
-    //    "WHERE c.id = :channelId")
-    //List<MessageDTO> findMessagesByChannelId(@Param("channelId") Long channelId);
 }

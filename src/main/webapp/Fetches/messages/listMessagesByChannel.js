@@ -65,5 +65,5 @@ function displayMessages(messages) {
 }
 
 // Call the function with a specific channel ID
-listMessagesByChannel(4);
+listMessagesByChannel(1);
 console.log('hi');
