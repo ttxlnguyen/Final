@@ -4,6 +4,7 @@ import com.mycompany.myapp.domain.Channels;
 import com.mycompany.myapp.domain.Messages;
 import com.mycompany.myapp.domain.UserProfile;
 import com.mycompany.myapp.repository.MessagesRepository;
+import com.mycompany.myapp.repository.UserProfileRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Service;
 public class MessagesService {
 
     MessagesRepository repository;
+
+    @Autowired
+    UserProfileRepository profileRepository;
 
     public MessagesService(@Autowired MessagesRepository repository) {
         this.repository = repository;
@@ -43,5 +47,9 @@ public class MessagesService {
         messages.setUserProfile(userProfile1);
 
         return repository.save(messages);
+    }
+
+    public UserProfile findProfileByUsername(String username) {
+        return profileRepository.findByUsername(username);
     }
 }
