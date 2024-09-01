@@ -32,4 +32,16 @@ public class MessagesService {
 
         return repository.save(messages);
     }
+
+    public Messages postMessagesByUserAndChannel(Long channelID, String username, Messages messages) {
+        Channels channels = new Channels();
+        UserProfile userProfile1 = new UserProfile();
+        channels.setId(channelID);
+        userProfile1.setUsername(username);
+
+        messages.setChannels(channels);
+        messages.setUserProfile(userProfile1);
+
+        return repository.save(messages);
+    }
 }

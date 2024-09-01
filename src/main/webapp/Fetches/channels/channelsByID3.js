@@ -23,7 +23,7 @@ console.log('Wzup');
 async function showChannelsByID(id) {
   try {
     const token =
-      'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNTE2Mzc4NCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI1MDc3Mzg0fQ.HyzP-FlvjSnOt0jmpwqJQlkD9siz_Pn7i9V6j_5ORPwJ1qOwcUsNapC9BpvnEtI1UQ6x37wLbwDcMIAkYFV0eA';
+      'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNTI5ODIxMSwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI1MjExODExfQ.i4MMTmNYKSiUmt7sPzdZx0uM0ncuB17BGPBbc9Ck9J24H96QlCit16XSu_U0a3OzjDybv8_F6YnJngnCuyBtpg';
 
     const response = await fetch(`http://localhost:8080/api/channels/${id}`, {
       method: 'GET',
@@ -53,4 +53,4 @@ function displayChannelInfo(data) {
   container.appendChild(div);
 }
 
-showChannelsByID(4);
+showChannelsByID(1);
