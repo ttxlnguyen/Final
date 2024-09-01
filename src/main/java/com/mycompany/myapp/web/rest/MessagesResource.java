@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Messages;
 import com.mycompany.myapp.repository.MessagesRepository;
+import com.mycompany.myapp.service.MessagesService;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -10,6 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,9 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/messages")
 @Transactional
 public class MessagesResource {
+
+    @Autowired
+    private MessagesService service;
 
     private static final Logger log = LoggerFactory.getLogger(MessagesResource.class);
 
@@ -181,5 +186,12 @@ public class MessagesResource {
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/channels/{id}")
+    public ResponseEntity<List<Messages>> getMessagesByChannelID(@PathVariable("id") Long id) {
+        List<Messages> messages = service.getMessagesByChannel(id);
+
+        return ResponseEntity.ok(messages);
     }
 }

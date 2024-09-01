@@ -1,16 +1,21 @@
 package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Channels;
+import com.mycompany.myapp.domain.Messages;
 import com.mycompany.myapp.repository.ChannelsRepository;
+import com.mycompany.myapp.service.ChannelsService;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
+import jakarta.mail.Service;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +29,8 @@ import tech.jhipster.web.util.ResponseUtil;
 @RequestMapping("/api/channels")
 @Transactional
 public class ChannelsResource {
+
+    private ChannelsService service;
 
     private static final Logger log = LoggerFactory.getLogger(ChannelsResource.class);
 
@@ -172,5 +179,32 @@ public class ChannelsResource {
         return ResponseEntity.noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    //    @RequestMapping("channels/{id}")
+    //    public List<Messages> getAllMessages(@PathVariable("id") Long id){
+    //
+    //        return service.getAllMessagesByChannel(id) ;
+    //    }
+
+    @GetMapping("/messages-by-id/{id}")
+    public ResponseEntity<List<Channels>> getAllMessagesById(@PathVariable("id") Long id) {
+        List<Channels> channels = service.findAllChannelMessagesByID(id);
+
+        return ResponseEntity.ok(channels);
+        //    try {
+        //        List<Channels> channels = channelsRepository.findAllMessagesById(id);
+        //        if (channels.isEmpty()) {
+        //            return ResponseEntity.noContent().build();
+        //        }
+        //        return ResponseEntity.ok(channels);
+        //    } catch (Exception e) {
+        //        // Log the exception
+        //        e.printStackTrace();
+        //        // Return a 500 response with an error message
+        //        System.out.println("error");
+        //
+        //    }
+        //    return null;
     }
 }
