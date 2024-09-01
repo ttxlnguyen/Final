@@ -82,7 +82,9 @@ public class SecurityConfiguration {
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/messages-by-id/{id}")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/channels/{id}")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/messages")).permitAll()
-                    .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/messages/channels/{id}")).permitAll()
+                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/messages/channels/{id}")).permitAll()
+                    .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/messages/channels/{ChannelsID}/messages/{id}")).permitAll()
+                    .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/api/messages/channels/{ChannelsID}/userProfile/{id}")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()
@@ -90,9 +92,7 @@ public class SecurityConfiguration {
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()
-                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()
-                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()
-                    
+
 
                     .requestMatchers(mvc.pattern("/api/register")).permitAll()
                     .requestMatchers(mvc.pattern("/api/activate")).permitAll()

@@ -43,6 +43,13 @@ public class Messages implements Serializable {
     @JsonIgnoreProperties(value = { "messages", "userProfiles" }, allowSetters = true)
     private Channels channels;
 
+    @PrePersist
+    protected void onCreate() {
+        if (this.sentAt == null) {
+            this.sentAt = Instant.now();
+        }
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
