@@ -1,0 +1,28 @@
+{
+  "annotations": {
+    "changelogDate": "20240828195850"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "reaction",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Reactions",
+  "relationships": [
+    {
+      "otherEntityName": "userProfile",
+      "relationshipName": "user",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "messages",
+      "relationshipName": "messages",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}
