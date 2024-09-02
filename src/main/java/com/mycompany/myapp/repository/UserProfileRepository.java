@@ -30,4 +30,8 @@ public interface UserProfileRepository extends UserProfileRepositoryWithBagRelat
 
     @Query("SELECT u FROM UserProfile u WHERE u.username=?1")
     UserProfile findByUsername(String username);
+
+    default Optional<UserProfile> findOneWithEagerRelationships(String username) {
+        return this.fetchBagRelationships(Optional.ofNullable(this.findByUsername(username)));
+    }
 }
