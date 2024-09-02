@@ -207,4 +207,11 @@ public class ChannelsResource {
         //    }
         //    return null;
     }
+
+    @GetMapping("/user-profile/{username}")
+    public ResponseEntity<List<Channels>> getAllChannelsByUsernames(@PathVariable("username") String username) {
+        List<Channels> channels = service.findChannelsByUsername(username);
+
+        return ResponseEntity.ok(channels);
+    }
 }

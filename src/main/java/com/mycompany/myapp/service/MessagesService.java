@@ -53,14 +53,8 @@ public class MessagesService {
     }
 
     public Messages postMessagesByUserAndChannel(Long channelID, String username, Messages messages) {
-        //        Channels channels = new Channels();
-        //        UserProfile userProfile1 = new UserProfile();
-        //        channels.setId(channelID);
-        //        userProfile1.setUsername(username);
-        //
-        //        messages.setChannels(channels);
-        //        messages.setUserProfile(userProfile1);
         Channels channels = channelsRepository.findById(channelID).orElseThrow(() -> new EntityNotFoundException("Channel not found"));
+
         UserProfile userProfile = profileRepository.findByUsername(username);
 
         messages.setChannels(channels);
@@ -68,7 +62,4 @@ public class MessagesService {
 
         return repository.save(messages);
     }
-    //    public UserProfile findProfileByUsername(String username) {
-    //        return profileRepository.findByUsername(username);
-    //    }
 }
