@@ -27,4 +27,11 @@ public interface UserProfileRepository extends UserProfileRepositoryWithBagRelat
     default Page<UserProfile> findAllWithEagerRelationships(Pageable pageable) {
         return this.fetchBagRelationships(this.findAll(pageable));
     }
+
+    @Query("SELECT u FROM UserProfile u WHERE u.username=?1")
+    UserProfile findByUsername(String username);
+
+    default Optional<UserProfile> findOneWithEagerRelationships(String username) {
+        return this.fetchBagRelationships(Optional.ofNullable(this.findByUsername(username)));
+    }
 }

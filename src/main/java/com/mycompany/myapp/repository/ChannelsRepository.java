@@ -16,4 +16,7 @@ public interface ChannelsRepository extends JpaRepository<Channels, Long> {
 
     @Query("SELECT c FROM Channels c JOIN c.messages m WHERE c.id = ?1")
     List<Channels> findAllMessagesById(Long id);
+
+    @Query("SELECT C.name FROM Channels C JOIN UserProfile U ON C.id = U.id WHERE U.username = ?1")
+    List<Channels> findAllChannelsByUsername(String username);
 }

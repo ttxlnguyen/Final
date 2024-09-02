@@ -20,12 +20,12 @@ console.log('Wzup');
 
 //http://localhost:8080/api/channels/1/messages
 
-async function showChannelsByID(id) {
+async function showChannelsByUsername(username) {
   try {
     const token =
-      'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNTI5ODIxMSwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI1MjExODExfQ.i4MMTmNYKSiUmt7sPzdZx0uM0ncuB17BGPBbc9Ck9J24H96QlCit16XSu_U0a3OzjDybv8_F6YnJngnCuyBtpg';
+      'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNTM5MzM4NSwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI1MzA2OTg1fQ.zOzMDDFuGjb-Bi7XJHTY9i9XRQqQMsG6jfODOGHwsVFGWG5PkZt4rk-dmJGbOCK5HH4_8Dyj8zXxww-wrD_I8A';
 
-    const response = await fetch(`http://localhost:8080/api/channels/${id}`, {
+    const response = await fetch(`http://localhost:8080/api/user-profiles/username/${username}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -45,12 +45,13 @@ async function showChannelsByID(id) {
 }
 
 function displayChannelInfo(data) {
-  const container = document.getElementById('channel-container');
+  const container = document.getElementById('user-container');
   container.innerHTML = '';
   const div = document.createElement('div');
-  const formatDisplay = `Channel Name: ${data.name}, User: ${data.userProfiles.map(user => user.username)} Messages: ${data.messages.map(cont => cont.content)}`;
+  const formatDisplay = `Channel Names: ${data.channels.map(channelname => channelname.name).join(', ')} `;
   div.innerHTML = formatDisplay;
   container.appendChild(div);
 }
 
-showChannelsByID(1);
+const userName = 'ForrestOfSorts';
+showChannelsByUsername(userName);

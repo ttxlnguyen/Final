@@ -186,4 +186,19 @@ public class UserProfileResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    //    @GetMapping("/username/{username}")
+    //    public ResponseEntity<UserProfile> getUserProfileByUsername(@PathVariable("username") String username){
+    //
+    //        UserProfile userProfile = userProfileRepository.findByUsername(username);
+    //
+    //        return ResponseEntity.ok(userProfile);
+    //    }
+
+    @GetMapping("/username/{username}")
+    public ResponseEntity<UserProfile> getUserProfileByUsername(@PathVariable("username") String username) {
+        log.debug("REST request to get UserProfile by username : {}", username);
+        Optional<UserProfile> userProfile = userProfileRepository.findOneWithEagerRelationships(username);
+        return ResponseUtil.wrapOrNotFound(userProfile);
+    }
 }

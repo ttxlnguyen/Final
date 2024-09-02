@@ -2,6 +2,7 @@ package com.mycompany.myapp.repository;
 
 import com.mycompany.myapp.domain.Messages;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -20,4 +21,5 @@ public interface MessagesRepository extends JpaRepository<Messages, Long> {
         nativeQuery = true
     )
     List<Messages> findAllMessagesByChannelId(Long id);
+    //    Optional<Messages> findByUsername(String username);
 }

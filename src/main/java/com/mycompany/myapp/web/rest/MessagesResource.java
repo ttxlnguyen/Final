@@ -80,6 +80,23 @@ public class MessagesResource {
             .body(newMessage);
     }
 
+    @PostMapping("/channels/{channelID}/userProfiles/{username}")
+    public ResponseEntity<Messages> createMessageByChannelByUsername(
+        @PathVariable Long channelID,
+        @PathVariable String username,
+        @RequestBody Messages messages
+    ) throws URISyntaxException {
+        log.debug("REST request to save Messages : {}", messages);
+        if (messages.getId() != null) {
+            throw new BadRequestAlertException("A new messages cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        Messages newMessage = service.postMessagesByUserAndChannel(channelID, username, messages);
+
+        return ResponseEntity.created(new URI("/api/messages/channels/" + channelID + "/userProfile" + username))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, messages.getId().toString()))
+            .body(newMessage);
+    }
+
     /**
      * {@code PUT  /messages/:id} : Updates an existing messages.
      *
