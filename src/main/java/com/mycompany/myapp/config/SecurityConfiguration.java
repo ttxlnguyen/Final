@@ -93,7 +93,7 @@ public class SecurityConfiguration {
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/channels/user-profile/{username}")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/user-profiles/username/{username}")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/channels")).permitAll()
-                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/channels/username/{username}")).permitAll()
+                    .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/channels/username/{username}")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()
