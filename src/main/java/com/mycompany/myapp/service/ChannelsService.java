@@ -2,6 +2,7 @@ package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.domain.Channels;
 import com.mycompany.myapp.domain.Messages;
+import com.mycompany.myapp.domain.UserProfile;
 import com.mycompany.myapp.repository.ChannelsRepository;
 import com.mycompany.myapp.repository.UserProfileRepository;
 import java.util.List;
@@ -31,5 +32,13 @@ public class ChannelsService {
 
     public List<Channels> findChannelsByUsername(String username) {
         return repository.findAllChannelsByUsername(username);
+    }
+
+    public Channels createChannelByUsername(String username, Channels channels) {
+        UserProfile userProfile = userProfileRepository.findByUsername(username);
+
+        channels.addUserProfile(userProfile);
+
+        return repository.save(channels);
     }
 }

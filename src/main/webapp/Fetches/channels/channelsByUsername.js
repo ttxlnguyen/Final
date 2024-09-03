@@ -48,7 +48,7 @@ function displayChannelInfo(data) {
   const container = document.getElementById('user-container');
   container.innerHTML = '';
   const div = document.createElement('div');
-  const formatDisplay = `Channel Names: ${data.channels.map(channelname => channelname.name).join(', ')} `;
+  const formatDisplay = `<p>User: ${data.username} <br> Channel Names: <br> ${data.channels.map(channelname => channelname.name).join('<br> ')} </p>`;
   div.innerHTML = formatDisplay;
   container.appendChild(div);
 }
