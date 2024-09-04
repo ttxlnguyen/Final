@@ -3,7 +3,9 @@ package com.mycompany.myapp.service;
 import com.mycompany.myapp.config.Constants;
 import com.mycompany.myapp.domain.Authority;
 import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.domain.UserProfile;
 import com.mycompany.myapp.repository.AuthorityRepository;
+import com.mycompany.myapp.repository.UserProfileRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.security.SecurityUtils;
@@ -35,6 +37,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final UserProfileRepository userProfileRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
@@ -43,11 +47,13 @@ public class UserService {
 
     public UserService(
         UserRepository userRepository,
+        UserProfileRepository userProfileRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
         CacheManager cacheManager
     ) {
         this.userRepository = userRepository;
+        this.userProfileRepository = userProfileRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
@@ -175,6 +181,9 @@ public class UserService {
             user.setAuthorities(authorities);
         }
         userRepository.save(user);
+        UserProfile userProfile = new UserProfile();
+        userProfile.setUsername(user.getLogin());
+        userProfileRepository.save(userProfile);
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
         return user;
