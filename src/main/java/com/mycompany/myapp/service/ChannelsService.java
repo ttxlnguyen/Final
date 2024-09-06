@@ -41,4 +41,8 @@ public class ChannelsService {
 
         return repository.save(channels);
     }
+
+    public List<Channels> findPrivateChannelsByUsername(String username) {
+        return repository.findAllPrivateChannelsByUsername(username);
+    }
 }

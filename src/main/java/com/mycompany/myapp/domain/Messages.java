@@ -35,7 +35,7 @@ public class Messages implements Serializable {
     @Column(name = "is_deleted")
     private Boolean isDeleted;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = { "messages", "channels" }, allowSetters = true)
     private UserProfile userProfile;
 
