@@ -27,6 +27,9 @@ public class Channels implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "privacy")
+    private Boolean privacy = false;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "channels") //I changed the fetch tpe to Eager to get whole json body
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "userProfile", "channels" }, allowSetters = true)
@@ -125,6 +128,14 @@ public class Channels implements Serializable {
         this.userProfiles.remove(userProfile);
         userProfile.getChannels().remove(this);
         return this;
+    }
+
+    public Boolean getPrivacy() {
+        return privacy;
+    }
+
+    public void setPrivacy(Boolean privacy) {
+        this.privacy = privacy;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -230,4 +230,11 @@ public class ChannelsResource {
 
         return ResponseEntity.ok(channels);
     }
+
+    @GetMapping("/userdms/{username}")
+    public ResponseEntity<List<Channels>> getAllPrivateChannelsByUsernames(@PathVariable("username") String username) {
+        List<Channels> channels = service.findPrivateChannelsByUsername(username);
+
+        return ResponseEntity.ok(channels);
+    }
 }

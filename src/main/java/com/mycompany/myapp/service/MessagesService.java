@@ -6,6 +6,7 @@ import com.mycompany.myapp.domain.UserProfile;
 import com.mycompany.myapp.repository.ChannelsRepository;
 import com.mycompany.myapp.repository.MessagesRepository;
 import com.mycompany.myapp.repository.UserProfileRepository;
+import com.mycompany.myapp.security.SecurityUtils;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class MessagesService {
 
-    MessagesRepository repository;
-    UserProfileRepository profileRepository;
-    ChannelsRepository channelsRepository;
+    private MessagesRepository repository;
+    private UserProfileRepository profileRepository;
+    private ChannelsRepository channelsRepository;
 
     public MessagesService(
         @Autowired MessagesRepository repository,
@@ -53,11 +54,15 @@ public class MessagesService {
     }
 
     public Messages postMessagesByChannelID(Long channelID, Messages messages) {
-        Channels channels = new Channels();
-        channels.setId(channelID);
+        //        Channels channels = new Channels();
+        //        channels.setId(channelID);
+        Channels channels = channelsRepository.findChannelsById(channelID);
 
         messages.setChannels(channels);
-
+        System.out.println(channelID);
+        String userLogin = SecurityUtils.getCurrentUserLogin().orElse("Default Value");
+        UserProfile userProfile = profileRepository.findByUsername(userLogin);
+        messages.setUserProfile(userProfile);
         return repository.save(messages);
     }
 
