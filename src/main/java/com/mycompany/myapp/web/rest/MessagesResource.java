@@ -1,5 +1,6 @@
 package com.mycompany.myapp.web.rest;
 
+import com.mycompany.myapp.domain.Channels;
 import com.mycompany.myapp.domain.Messages;
 import com.mycompany.myapp.repository.MessagesRepository;
 import com.mycompany.myapp.service.MessagesService;
@@ -94,6 +95,22 @@ public class MessagesResource {
 
         return ResponseEntity.created(new URI("/api/messages/channels/" + channelID + "/userProfile" + username))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, messages.getId().toString()))
+            .body(newMessage);
+    }
+
+    @PostMapping("/channels/{channelID}")
+    public ResponseEntity<Messages> createMessagesByChannelID(@PathVariable("channelID") Long channelID, @RequestBody Messages messages)
+        throws URISyntaxException {
+        log.debug("REST request to save Messages : {}", messages);
+        if (messages.getId() != null) {
+            throw new BadRequestAlertException("A new messages cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+
+        Messages newMessage = new Messages();
+        newMessage = service.postMessagesByChannelID(channelID, messages);
+
+        return ResponseEntity.created(new URI("/api/channels/" + channelID))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, messages.getId().toString()))
             .body(newMessage);
     }
 

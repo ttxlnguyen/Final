@@ -52,6 +52,15 @@ public class MessagesService {
         return repository.save(messages);
     }
 
+    public Messages postMessagesByChannelID(Long channelID, Messages messages) {
+        Channels channels = new Channels();
+        channels.setId(channelID);
+
+        messages.setChannels(channels);
+
+        return repository.save(messages);
+    }
+
     public Messages postMessagesByUserAndChannel(Long channelID, String username, Messages messages) {
         Channels channels = channelsRepository.findById(channelID).orElseThrow(() -> new EntityNotFoundException("Channel not found"));
 
