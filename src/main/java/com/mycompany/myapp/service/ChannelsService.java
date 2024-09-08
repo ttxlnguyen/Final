@@ -66,4 +66,8 @@ public class ChannelsService {
     public List<Channels> findPrivateChannelsByUsername(String username) {
         return repository.findAllPrivateChannelsByUsername(username);
     }
+
+    public List<Channels> getAllPublicChannels() {
+        return repository.listAllPublicChannels();
+    }
 }
