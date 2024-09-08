@@ -30,4 +30,7 @@ public interface ChannelsRepository extends JpaRepository<Channels, Long> {
         nativeQuery = true
     )
     List<Channels> findAllPrivateChannelsByUsername(String username);
+
+    @Query("SELECT c FROM Channels c WHERE c.privacy = false")
+    List<Channels> listAllPublicChannels();
 }

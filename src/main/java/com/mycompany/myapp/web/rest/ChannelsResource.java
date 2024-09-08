@@ -198,6 +198,12 @@ public class ChannelsResource {
         return channelsRepository.findAll();
     }
 
+    @GetMapping("/public")
+    public List<Channels> getAlPubliclChannels() {
+        log.debug("REST request to get all Channels");
+        return service.getAllPublicChannels();
+    }
+
     /**
      * {@code GET  /channels/:id} : get the "id" channels.
      *
