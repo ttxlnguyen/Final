@@ -5,6 +5,7 @@ import com.mycompany.myapp.domain.Messages;
 import com.mycompany.myapp.domain.UserProfile;
 import com.mycompany.myapp.repository.ChannelsRepository;
 import com.mycompany.myapp.repository.UserProfileRepository;
+import com.mycompany.myapp.security.SecurityUtils;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,9 +36,29 @@ public class ChannelsService {
     }
 
     public Channels createChannelByUsername(String username, Channels channels) {
+        Boolean privacy = true;
         UserProfile userProfile = userProfileRepository.findByUsername(username);
 
+        String userLogin = SecurityUtils.getCurrentUserLogin().orElse("Default Value");
+        UserProfile userProfile1 = userProfileRepository.findByUsername(userLogin);
+
+        channels.addUserProfile(userProfile1);
         channels.addUserProfile(userProfile);
+        channels.setPrivacy(privacy);
+
+        return repository.save(channels);
+    }
+
+    public Channels createPublicChannelByUsername(String username, Channels channels) {
+        Boolean privacy = false;
+        UserProfile userProfile = userProfileRepository.findByUsername(username);
+
+        String userLogin = SecurityUtils.getCurrentUserLogin().orElse("Default Value");
+        UserProfile userProfile1 = userProfileRepository.findByUsername(userLogin);
+
+        channels.addUserProfile(userProfile1);
+        channels.addUserProfile(userProfile);
+        channels.setPrivacy(privacy);
 
         return repository.save(channels);
     }
