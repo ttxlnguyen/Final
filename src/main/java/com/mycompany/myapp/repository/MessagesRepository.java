@@ -17,7 +17,7 @@ public interface MessagesRepository extends JpaRepository<Messages, Long> {
         value = "SELECT M.* FROM messages M " +
         "JOIN user_profile U ON M.user_profile_id = U.id " +
         "JOIN channels C ON M.channels_id = C.id " +
-        "WHERE C.id = ?1",
+        "WHERE C.id = ?1 ORDER BY M.sent_at DESC",
         nativeQuery = true
     )
     List<Messages> findAllMessagesByChannelId(Long id);
