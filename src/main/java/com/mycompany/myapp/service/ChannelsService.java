@@ -49,15 +49,15 @@ public class ChannelsService {
         return repository.save(channels);
     }
 
-    public Channels createPublicChannelByUsername(String username, Channels channels) {
+    public Channels createPublicChannelByUsername(Channels channels) {
         Boolean privacy = false;
-        UserProfile userProfile = userProfileRepository.findByUsername(username);
+        //        UserProfile userProfile = userProfileRepository.findByUsername(username);
 
         String userLogin = SecurityUtils.getCurrentUserLogin().orElse("Default Value");
         UserProfile userProfile1 = userProfileRepository.findByUsername(userLogin);
 
         channels.addUserProfile(userProfile1);
-        channels.addUserProfile(userProfile);
+        //        channels.addUserProfile(userProfile);
         channels.setPrivacy(privacy);
 
         return repository.save(channels);

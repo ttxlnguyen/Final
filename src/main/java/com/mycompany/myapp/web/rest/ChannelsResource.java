@@ -80,20 +80,34 @@ public class ChannelsResource {
             .body(channel);
     }
 
-    @PostMapping("/username/{username}/public")
-    public ResponseEntity<Channels> postPublicChannelsByUsername(@PathVariable("username") String username, @RequestBody Channels channels)
-        throws URISyntaxException {
+    @PostMapping("/username/public")
+    public ResponseEntity<Channels> postPublicChannelsByUsername(@RequestBody Channels channels) throws URISyntaxException {
         log.debug("REST request to save Channels : {}", channels);
         if (channels.getId() != null) {
             throw new BadRequestAlertException("A new channels cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Boolean privacy = false;
-        Channels channel = service.createPublicChannelByUsername(username, channels);
+        Channels channel = service.createPublicChannelByUsername(channels);
 
-        return ResponseEntity.created(new URI("/api/channels/username" + username))
+        return ResponseEntity.created(new URI("/api/channels/username"))
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, channel.getId().toString()))
             .body(channel);
     }
+
+    //    @PostMapping("/username/{username}/public")
+    //    public ResponseEntity<Channels> postPublicChannelsByUsername(@PathVariable("username") String username, @RequestBody Channels channels)
+    //        throws URISyntaxException {
+    //        log.debug("REST request to save Channels : {}", channels);
+    //        if (channels.getId() != null) {
+    //            throw new BadRequestAlertException("A new channels cannot already have an ID", ENTITY_NAME, "idexists");
+    //        }
+    //        Boolean privacy = false;
+    //        Channels channel = service.createPublicChannelByUsername(username, channels);
+    //
+    //        return ResponseEntity.created(new URI("/api/channels/username" + username))
+    //            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, channel.getId().toString()))
+    //            .body(channel);
+    //    }
 
     /**
      * {@code PUT  /channels/:id} : Updates an existing channels.
