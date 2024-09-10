@@ -24,7 +24,7 @@
 async function listMessagesByChannel(id) {
   try {
     const token =
-      'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNTE2Mzc4NCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI1MDc3Mzg0fQ.HyzP-FlvjSnOt0jmpwqJQlkD9siz_Pn7i9V6j_5ORPwJ1qOwcUsNapC9BpvnEtI1UQ6x37wLbwDcMIAkYFV0eA';
+      'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNTkwMzg3OCwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI1ODE3NDc4fQ.ptiFLkfktscYN7Dt2LqP9DcIuLDmQR65921aJAhys9lHKhMaoCAFn8OUNG3wY7fwANVPUBEvoGXTcsgfOl_yAA';
 
     const response = await fetch(`http://localhost:8080/api/messages/channels/${id}`, {
       method: 'GET',
