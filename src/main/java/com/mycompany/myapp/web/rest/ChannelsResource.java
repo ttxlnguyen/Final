@@ -14,6 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +42,9 @@ public class ChannelsResource {
 
     private final ChannelsRepository channelsRepository;
 
-    public ChannelsResource(ChannelsRepository channelsRepository) {
+    public ChannelsResource(ChannelsRepository channelsRepository, @Autowired ChannelsService service) {
         this.channelsRepository = channelsRepository;
+        this.service = service;
     }
 
     /**
@@ -63,6 +65,49 @@ public class ChannelsResource {
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, channels.getId().toString()))
             .body(channels);
     }
+
+    @PostMapping("/username/{username}")
+    public ResponseEntity<Channels> postChannelsByUsername(@PathVariable("username") String username, @RequestBody Channels channels)
+        throws URISyntaxException {
+        log.debug("REST request to save Channels : {}", channels);
+        if (channels.getId() != null) {
+            throw new BadRequestAlertException("A new channels cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        Channels channel = service.createChannelByUsername(username, channels);
+
+        return ResponseEntity.created(new URI("/api/channels/username" + username))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, channel.getId().toString()))
+            .body(channel);
+    }
+
+    @PostMapping("/username/public")
+    public ResponseEntity<Channels> postPublicChannelsByUsername(@RequestBody Channels channels) throws URISyntaxException {
+        log.debug("REST request to save Channels : {}", channels);
+        if (channels.getId() != null) {
+            throw new BadRequestAlertException("A new channels cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        Boolean privacy = false;
+        Channels channel = service.createPublicChannelByUsername(channels);
+
+        return ResponseEntity.created(new URI("/api/channels/username"))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, channel.getId().toString()))
+            .body(channel);
+    }
+
+    //    @PostMapping("/username/{username}/public")
+    //    public ResponseEntity<Channels> postPublicChannelsByUsername(@PathVariable("username") String username, @RequestBody Channels channels)
+    //        throws URISyntaxException {
+    //        log.debug("REST request to save Channels : {}", channels);
+    //        if (channels.getId() != null) {
+    //            throw new BadRequestAlertException("A new channels cannot already have an ID", ENTITY_NAME, "idexists");
+    //        }
+    //        Boolean privacy = false;
+    //        Channels channel = service.createPublicChannelByUsername(username, channels);
+    //
+    //        return ResponseEntity.created(new URI("/api/channels/username" + username))
+    //            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, channel.getId().toString()))
+    //            .body(channel);
+    //    }
 
     /**
      * {@code PUT  /channels/:id} : Updates an existing channels.
@@ -153,6 +198,12 @@ public class ChannelsResource {
         return channelsRepository.findAll();
     }
 
+    @GetMapping("/public")
+    public List<Channels> getAlPubliclChannels() {
+        log.debug("REST request to get all Channels");
+        return service.getAllPublicChannels();
+    }
+
     /**
      * {@code GET  /channels/:id} : get the "id" channels.
      *
@@ -206,5 +257,19 @@ public class ChannelsResource {
         //
         //    }
         //    return null;
+    }
+
+    @GetMapping("/user-profile/{username}")
+    public ResponseEntity<List<Channels>> getAllChannelsByUsernames(@PathVariable("username") String username) {
+        List<Channels> channels = service.findChannelsByUsername(username);
+
+        return ResponseEntity.ok(channels);
+    }
+
+    @GetMapping("/userdms/{username}")
+    public ResponseEntity<List<Channels>> getAllPrivateChannelsByUsernames(@PathVariable("username") String username) {
+        List<Channels> channels = service.findPrivateChannelsByUsername(username);
+
+        return ResponseEntity.ok(channels);
     }
 }
