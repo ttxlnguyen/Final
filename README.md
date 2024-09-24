@@ -3,7 +3,7 @@
 **Co-Lab**, a TCP communications App like Discord built specifically for educational and professional settings.
 
 Contributors: [Timothy Nguyen]() | [Will Chapman](https://github.com/wpc3) | [Ian Gordan](https://github.com/igordon215) | [Coreye Ross](https://github.com/coreyeross25)
-<br/>Please see the [Co-Lab frontend](https://github.com/ttxlnguyen/FinalReact)) repository to see the frontend code.
+<br/>Please see the [Co-Lab frontend](https://github.com/ttxlnguyen/FinalReact) repository to see the frontend code.
 
 
 <img width="1416" alt="Screen Shot 2024-09-12 at 2 17 49 PM" src="https://github.com/user-attachments/assets/199cd27f-2fb2-4c46-8176-d80ac4294515">
